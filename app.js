@@ -8,11 +8,13 @@ const mongoose = require('mongoose');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 const missionRoutes = require('./routes/missionRoutes');
+var loginRouters = require('./routes/loginRouter');
+
 
 var app = express();
 mongoose.connect('mongodb://localhost:27017/ThucTapDB', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
+    // useNewUrlParser: true,
+    // useUnifiedTopology: true
 }).then(() => {
     console.log("Connected to MongoDB");
 }).catch(err => {
@@ -33,6 +35,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/api/mission', missionRoutes);
+app.use('/login' , loginRouters);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

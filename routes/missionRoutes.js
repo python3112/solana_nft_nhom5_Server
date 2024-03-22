@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const missionController = require('../controller/missionController');
+const missionController = require('../controller/api/missionController');
 
 router.post('/createMission', missionController.createMission);
 
