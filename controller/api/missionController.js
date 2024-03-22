@@ -1,4 +1,4 @@
-const Mission = require('../models/mission')
+const Mission = require('../../models/mission')
 
 exports.createMission = (req, res) => {
     // Kiểm tra xem tất cả các trường cần thiết đã được cung cấp hay không
