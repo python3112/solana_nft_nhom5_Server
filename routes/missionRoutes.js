@@ -2,10 +2,10 @@ const express = require('express');
 const router = express.Router();
 const missionController = require('../controller/missionController');
 
-router.post('/missions', missionController.createMission);
+router.post('/createMission', missionController.createMission);
 
 // Lấy danh sách tất cả nhiệm vụ
-router.get('/missions', missionController.getAllMissions);
+router.get('/', missionController.getAllMissions);
 
 // Lấy thông tin nhiệm vụ bằng id
 router.get('/missions/:id', missionController.getMissionById);
