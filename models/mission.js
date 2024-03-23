@@ -12,6 +12,13 @@ const missSchema = new mongoose.Schema({
     detail: {
         type: String,
     },
+    duration: {
+        type: String,
+    },
+    userId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'userModel'
+    }
 })
 const miss = mongoose.model('mission', missSchema)
 module.exports = miss

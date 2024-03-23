@@ -11,9 +11,12 @@ router.get('/', missionController.getAllMissions);
 router.get('/missions/:id', missionController.getMissionById);
 
 // Cập nhật thông tin nhiệm vụ
-router.put('/missions/:id', missionController.updateMission);
+router.put('/updateMission/:id', missionController.updateMission);
 
 // Xóa nhiệm vụ
-router.delete('/missions/:id', missionController.deleteMission);
+router.delete('/deleteMissions/:id', missionController.deleteMission);
+
+// Lấy thông tin nhiệm vụ hoàn thành và ID User
+router.get('/missionsCompleted/:id',missionController.getMissionCompleted)
 
 module.exports = router;
