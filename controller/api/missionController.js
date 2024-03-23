@@ -10,7 +10,9 @@ exports.createMission = (req, res) => {
         title: req.body.title,
         point: req.body.point,
         completed: req.body.completed || false,
-        detail: req.body.detail
+        detail: req.body.detail,
+        duration: req.body.date,
+        userId: req.body.userId
     });
 
     newMission.save()
@@ -68,5 +70,15 @@ exports.deleteMission = (req, res) => {
         })
         .catch(err => {
             res.status(400).send("Unable to delete mission");
+        });
+};
+exports.getMissionCompleted = (req, res) => {
+    const userId = req.params.userId;
+    Mission.find({ userId: userId, completed: true })
+        .then(missions => {
+            res.json(missions);
+        })
+        .catch(err => {
+            res.status(400).send("Unable to fetch completed missions");
         });
 };
