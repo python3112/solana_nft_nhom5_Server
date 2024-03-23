@@ -9,5 +9,6 @@ router.post('/userslogin',api_users.userLogin);
 router.put('/users/:idu',api_users.updateUser);    
 router.delete('/users/:idu',api_users.deleteUser); 
 
-
+// lấy ra 10 người dùng có điểm cao nhất
+router.get('/top-users', api_users.getTopUsers);
 module.exports = router;

@@ -20,6 +20,19 @@ exports.listUser = async (req, res, next) => {
         console.error(error);
         res.status(500).json({ status: 0, msg: error.message });
     }
+} 
+exports.getTopUsers = async (req, res, next) => {
+    try {
+        // Sử dụng phương thức sort và limit để lấy ra 10 người dùng có số điểm cao nhất
+        const topUsers = await md.userModel.find().sort({ point: -1 }).limit(10);
+        if (topUsers.length === 0) {
+            return res.status(404).json({ message: 'Không có người dùng nào' });
+        }
+        res.json(topUsers);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: 'Server Error' });
+    }
 }
 
 exports.oneUser = async (req, res, next) => {
