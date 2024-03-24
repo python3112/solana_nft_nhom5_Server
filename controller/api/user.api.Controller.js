@@ -37,7 +37,7 @@ exports.getTopUsers = async (req, res, next) => {
 
 exports.oneUser = async (req, res, next) => {
     try {
-        const user = await md.userModel.findOne({ username: req.params.username });
+        const user = await md.userModel.findById(req.params.id);
         if (!user) {
             return res.status(404).json({ message: 'Không tìm thấy người dùng' });
         }
@@ -50,14 +50,15 @@ exports.oneUser = async (req, res, next) => {
 
 exports.addUser = async (req, res, next) => {
     try {
-        const { userName, userPass, adressWallet, point, pointComplete, userPms } = req.body;
-        const hashedPassword = await bcrypt.hash(userPass, 10);
+        const { userName, userPass , userPms } = req.body;
+       
         const newUser = new md.userModel({
+            avata : "https://cdn-icons-png.flaticon.com/128/3135/3135715.png",
             userName,
-            userPass: hashedPassword,
-            adressWallet,
-            point,
-            pointComplete,
+            userPass: userPass,
+            adressWallet :"",
+            point :0,
+            pointComplete :0,
             userPms
         });
         await newUser.save();
@@ -71,14 +72,10 @@ exports.addUser = async (req, res, next) => {
 
 exports.userLogin = async (req, res, next) => {
     try {
-        const { username, password } = req.body;
-        const user = await md.userModel.findOne({ username });
+        const { userName, userPass } = req.body;
+        const user = await md.userModel.findOne({ userName : userName , userPass :  userPass });
         if (!user) {
             return res.status(404).json({ message: 'Không tìm thấy người dùng' });
-        }
-        const passwordMatch = await bcrypt.compare(password, user.userPass);
-        if (!passwordMatch) {
-            return res.status(401).json({ message: 'Mật khẩu không đúng' });
         }
         objReturn.msg = 'Đăng nhập thành công';
         res.status(200).json(objReturn);
